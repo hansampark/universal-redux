@@ -1,0 +1,46 @@
+{
+  "name": "universal-redux-boilerplate",
+  "version": "0.0.1",
+  "description": "Universal redux boilerplate with hot loading, react-router",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_PATH=./src NODE_ENV=production PORT=8080 node ./server/babel.server",
+    "build": "webpack --verbose --colors --display-error-details --config ./webpack.config.js",
+    "start-dev": "NODE_PATH=./src NODE_ENV=development node ./server/babel.server",
+    "watch-client": "NODE_PATH=./src node server/dev.js",
+    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\""
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "universal",
+    "hot reloading",
+    "react-router",
+    "starter",
+    "babel"
+  ],
+  "author": "Arthur Park",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-0": "^6.1.18",
+    "express": "^4.13.3",
+    "history": "^1.13.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0",
+    "redux": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.0",
+    "eslint": "^1.10.2",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  }
+}
