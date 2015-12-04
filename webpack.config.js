@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const DIST_PATH = path.resolve(__dirname, './dist');
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HOST = 'localhost';
 const PORT = parseInt(process.env.PORT, 10) + 1 || 3001;
 
@@ -27,10 +26,7 @@ module.exports = {
 
   module: {
     loaders: [
-      // { test: /\.(jpe?g|png|gif|svg)$/, loader: 'file' },
-      // { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel']},
-      { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] },
-      // { test: /\.scss$/, loader: 'style!css!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true' }
+      { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
     ]
   },
   progress: true,
