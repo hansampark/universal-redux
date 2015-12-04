@@ -1,11 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
-// var writeStats = require('./utils/writeStats');
-// var notifyStats = require('./utils/notifyStats');
-var assetsPath = path.resolve(__dirname, './dist');
+const path = require('path');
+const webpack = require('webpack');
+const DIST_PATH = path.resolve(__dirname, './dist');
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var host = 'localhost';
-var port = parseInt(process.env.PORT) + 1 || 3001;
+const HOST = 'localhost';
+const PORT = parseInt(process.env.PORT, 10) + 1 || 3001;
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -14,25 +12,24 @@ module.exports = {
 
   entry: {
     'main': [
-      'webpack-dev-server/client?http://' + host + ':' + port,
+      'webpack-dev-server/client?http://' + HOST + ':' + PORT,
       'webpack/hot/only-dev-server',
-      './client/app.jsx'
+      './app/app.jsx'
     ]
   },
 
   output: {
-    path: assetsPath,
-    filename: '[name].js',
-    // filename: '[name]-[hash].js',
+    path: DIST_PATH,
+    filename: '[name]-[hash].js',
     chunkFilename: '[name]-[hash].js',
-    publicPath: 'http://' + host + ':' + port + '/dist/'
+    publicPath: 'http://' + HOST + ':' + PORT + '/dist/'
   },
 
   module: {
     loaders: [
       // { test: /\.(jpe?g|png|gif|svg)$/, loader: 'file' },
       // { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel']},
-      { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel']},
+      { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] },
       // { test: /\.scss$/, loader: 'style!css!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true' }
     ]
   },
@@ -49,7 +46,7 @@ module.exports = {
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false}),
+    // new webpack.DefinePlugin({ __CLIENT__: true, __SERVER__: false }),
 
     // // stats
     // function () {

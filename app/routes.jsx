@@ -1,6 +1,6 @@
 import React from "react"
 import Router, { Route } from 'react-router'
-import Main from "./main"
+import Main from "./routes/main"
 import Page from "./components/page"
 
 export default (

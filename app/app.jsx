@@ -1,8 +1,9 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Router from 'react-router'
-import routes from '../app/routes'
+import routes from './routes'
 
 Router.run(routes, Router.HashLocation, (Root) => {
   console.log('client')
-  React.render(<Root/>, document.querySelector('#app'));
+  ReactDOM.render(<Root/>, document.querySelector('#app'));
 });
