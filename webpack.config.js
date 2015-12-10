@@ -1,6 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const DIST_PATH = path.resolve(__dirname, './dist');
+const PUBLIC_PATH = path.resolve(__dirname, 'public');
 const HOST = 'localhost';
 const PORT = parseInt(process.env.PORT, 10) + 1 || 3001;
 
@@ -18,10 +19,10 @@ module.exports = {
   },
 
   output: {
-    path: DIST_PATH,
+    path: PUBLIC_PATH,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[hash].js',
-    publicPath: 'http://' + HOST + ':' + PORT + '/dist/'
+    publicPath: 'http://' + HOST + ':' + PORT + '/public/'
   },
 
   module: {
@@ -44,12 +45,16 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     // new webpack.DefinePlugin({ __CLIENT__: true, __SERVER__: false }),
 
-    // // stats
-    // function () {
-    //   this.plugin('done', notifyStats);
-    // },
-    // function () {
-    //   this.plugin('done', writeStats);
-    // }
+    // stats
+    function () {
+      this.plugin('done', function(stats) {
+        const statsJson = stats.toJson()
+        fs.writeFileSync(
+          path.join(__dirname, 'public', 'stats.json'),
+          JSON.stringify(statsJson.assets)
+        );
+        // console.log(statsJson.assets, statsJson.assetsByChunkName)
+      });
+    }
   ]
 };
