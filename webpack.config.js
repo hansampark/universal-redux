@@ -20,7 +20,7 @@ module.exports = {
 
   output: {
     path: PUBLIC_PATH,
-    filename: '[name]-[hash].js',
+    filename: '[name].js',
     chunkFilename: '[name]-[hash].js',
     publicPath: 'http://' + HOST + ':' + PORT + '/public/'
   },
@@ -30,7 +30,8 @@ module.exports = {
       { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
     ]
   },
-  progress: true,
+  progress: false,
+
   resolve: {
     modulesDirectories: [
       // 'src',
@@ -38,6 +39,7 @@ module.exports = {
     ],
     extensions: ['', '.json', '.js', '.jsx']
   },
+
   plugins: [
 
     // hot reload
