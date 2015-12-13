@@ -30,13 +30,14 @@
     "babel-preset-stage-0": "^6.1.18",
     "babel-register": "^6.3.13",
     "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
     "express": "^4.13.3",
-    "history": "^1.13.1",
+    "history": "^1.16.0",
     "i18n-abide": "0.0.23",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
-    "react-router": "^1.0.0",
+    "react-router": "^1.0.2",
     "redux": "^3.0.4"
   },
   "devDependencies": {

@@ -1,9 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { Router, Route, Link } from 'react-router'
-import routes from './routes'
+// import routes from './routes'
+import Index from './routes/index'
 
-ReactDOM.render(routes, Router.HashLocation, (Root) => {
-  console.log('client')
-  ReactDOM.render(<Root/>, document.querySelector('#app'));
-});
+render((
+  <Router>
+    <Route path="/" component={Index} />
+  </Router>
+), document.getElementById('app'));

@@ -11,14 +11,15 @@ const options = {
   inline: true,
   lazy: false,
   progress: false,
-  publicPath: config.output.publicPath,
+  publicPath: `http://${HOST}:${PORT}/assets/`,
   stats: {
     colors: true
   },
   historyApiFallback: true,
   proxy: {
     '*': `http://${HOST}:${PORT - 1}`
-  }
+  },
+   headers: { 'Access-Control-Allow-Origin': '*' }
 };
 
 const compiler = webpack(config);

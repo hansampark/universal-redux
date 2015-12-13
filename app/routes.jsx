@@ -1,10 +1,14 @@
-import React from "react"
-import Router, { Route } from 'react-router'
-import Main from "./routes/main"
-import Page from "./components/page"
+import Layout from './routes/layout';
+import Index from './routes/index';
+import About from './routes/about'
 
-export default (
-  <Route path="/" handler={Main}>
-    <Route path="/" handler={Page} />
-  </Route>
-)
+const routes = {
+  path: '',
+  component: Layout,
+  childRoutes: [
+    { path: '/', component: Index },
+    { path: '/about', component: About }
+  ]
+}
+
+export { routes };
