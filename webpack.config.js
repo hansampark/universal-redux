@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const PUBLIC_PATH = path.resolve(__dirname, 'public');
+const JS_PATH = path.join(PUBLIC_PATH, 'javascripts');
 const HOST = 'localhost';
 const PORT = parseInt(process.env.PORT, 10) + 1 || 3001;
 
@@ -11,18 +12,18 @@ module.exports = {
   context: path.resolve(__dirname),
 
   entry: {
-    'main': [
-      'webpack-dev-server/client?http://' + HOST + ':' + PORT,
+    'app': [
+      `webpack-dev-server/client?http://${HOST}:${PORT}`,
       'webpack/hot/only-dev-server',
       './app/app.jsx'
     ]
   },
 
   output: {
-    path: PUBLIC_PATH,
+    path: JS_PATH,
     filename: '[name].js',
     chunkFilename: '[name]-[hash].js',
-    publicPath: 'http://' + HOST + ':' + PORT + '/public/'
+    publicPath: `http://${HOST}:${PORT}/assets/javascripts`
   },
 
   module: {
@@ -30,11 +31,11 @@ module.exports = {
       { test: /\.js[x]$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
     ]
   },
+
   progress: false,
 
   resolve: {
     modulesDirectories: [
-      // 'src',
       'node_modules'
     ],
     extensions: ['', '.json', '.js', '.jsx']

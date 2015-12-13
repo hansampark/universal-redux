@@ -10,4 +10,4 @@ require('babel-register');
 // delete process.env.BROWSER;
 const server = require('./app/server');
 const IS_DEV = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-IS_DEV && require('./app/dev.server');
+IS_DEV && require('./app/dev-server');

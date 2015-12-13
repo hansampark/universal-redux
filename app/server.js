@@ -41,7 +41,7 @@ server.get('*', (req, res) => {
         <link key="normalize" rel="stylesheet" href="" />
       ]
       const scripts = [
-        <script key="main" type="text/javascript" src="/assets/app.js" charSet="utf-8"></script>
+        <script key="main" type="text/javascript" src="/assets/javascripts/app.js" charSet="utf-8"></script>
       ]
       // console.log('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(
       //   <HTML lang={lang} dir={lang_dir} head={head} styles={styles} scripts={scripts}>
