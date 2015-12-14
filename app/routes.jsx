@@ -1,12 +1,12 @@
 import Layout from './routes/layout';
-import Index from './routes/index';
+import Home from './routes/home';
 import About from './routes/about'
 
 const routes = {
   path: '',
   component: Layout,
   childRoutes: [
-    { path: '/', component: Index },
+    { path: '/', component: Home },
     { path: '/about', component: About }
   ]
 }
