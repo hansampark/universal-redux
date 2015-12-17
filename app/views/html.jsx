@@ -36,8 +36,8 @@ export default class HTML extends Component {
       children,
       styles,
       scripts
-    } = this.props
-    const meta = Object.assign({}, HTML.defaultProps.head, head)
+    } = this.props;
+    const meta = Object.assign({}, HTML.defaultProps.head, head);
 
     return <html lang={lang} dir={dir}>
       <head>

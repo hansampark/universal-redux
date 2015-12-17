@@ -6,7 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import HTML from './views/html';
-import Layout from './routes/layout';
 import { routes } from './routes';
 
 const ENV = process.env.NODE_ENV || 'development';
@@ -14,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
 const server = express();
 const router = server.Router;
-
 
 // server.use(i18n.abide({
 //   supported_languages: ['en-US', 'de', 'es', 'db-LB', 'it-CH'],
@@ -30,11 +28,14 @@ if (ENV === 'development') {
   let hotMiddleware = require('webpack-hot-middleware');
   let compiler = webpack(webpackConfig);
   server.use(webpackDevMiddleware(compiler, {
-    noInfo: true, publicPath: webpackConfig.output.publicPath
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
   }));
 
   server.use(hotMiddleware(compiler, {
-    log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
   }));
 }
 
@@ -52,6 +53,7 @@ server.get('*', (req, res) => {
       const head = {
 
       };
+      // Only put global style here.
       const styles = [
         <link key="normalize" rel="stylesheet" href="" />
       ];

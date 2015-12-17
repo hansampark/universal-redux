@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from '../components/card';
+import Card from '../card';
 const customers = [
   {
     id: 1,
@@ -23,7 +23,7 @@ const customers = [
   },
 ];
 
-export default class Index extends Component {
+export default class HomePage extends Component {
   render() {
     return <div style={{ backgroundColor: '#ccc' }}>
       <header className="page-header">
