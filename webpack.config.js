@@ -1,10 +1,11 @@
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const precss = require('precss');
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.DEBUG;
-// const HOST = 'localhost';
-// const PORT = parseInt(process.env.PORT, 10) + 1 || 3001;
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -29,8 +30,30 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js[x]$/, include: path.join(__dirname, 'app'), loaders: ['babel'] }
+      {
+        test: /\.js[x]$/,
+        include: path.join(__dirname, 'app'),
+        loaders: ['babel']
+      },
+      {
+        test: /\.json$/,
+        include: path.join(__dirname, 'app'),
+        loaders: ['json']
+      },
+      {
+        test: /\.css$/,
+        loader: (DEBUG || ENV === 'development')
+              ? 'style!css?modules&localIdentName=[name]--[local]!postcss?pack=cleaner'
+              : ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]--[local]--[hash:base64:5]!postcss?pack=cleaner')
+      },
     ]
+  },
+
+  postcss: function() {
+    return {
+      defaults: [autoprefixer, precss],
+      cleaner: [autoprefixer({ browsers: ['last 2 versions'] })]
+    };
   },
 
   progress: false,
@@ -43,10 +66,13 @@ module.exports = {
   },
 
   plugins: [
-
+    new webpack.optimize.DedupePlugin(),
     // hot reload
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    })
   ]
 };
