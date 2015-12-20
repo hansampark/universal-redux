@@ -1,5 +1,5 @@
 {
-  "name": "universal-redux-boilerplate",
+  "name": "universal-redux",
   "version": "0.0.1",
   "description": "Universal redux boilerplate with hot loading, react-router",
   "main": "index.js",
@@ -19,7 +19,9 @@
     "hot reloading",
     "react-router",
     "starter",
-    "babel"
+    "babel",
+    "i18n",
+    "css modules"
   ],
   "author": "Arthur Park",
   "license": "MIT",
