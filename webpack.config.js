@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.DEBUG;
 
-module.exports = {
+let webpackConfig = {
   devtool: 'eval-source-map',
 
   context: __dirname,
@@ -71,8 +71,24 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    // TODO: find a way to create separate css map file
     new ExtractTextPlugin('app.css', {
       allChunks: true
     })
   ]
 };
+
+if (ENV !== 'development') {
+  if (ENV === 'production') {
+    delete webpackConfig.devtool;
+  }
+
+  webpackConfig.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: ENV !== 'production',
+      mangle: ENV === 'production'
+    })
+  );
+}
+
+module.exports = webpackConfig;
