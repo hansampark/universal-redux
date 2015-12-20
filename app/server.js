@@ -10,6 +10,7 @@ import { routes } from './routes';
 
 const ENV = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 3000;
+const ASSETS_PATH = path.resolve(__dirname, '../assets');
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
 const server = express();
 const router = server.Router;
@@ -39,6 +40,8 @@ if (ENV === 'development') {
   }));
 }
 
+// TODO: Would be nice if ASSETS_PATH is not needed
+server.use(express.static(ASSETS_PATH));
 server.use(express.static(PUBLIC_PATH));
 
 server.get('*', (req, res) => {
@@ -55,7 +58,7 @@ server.get('*', (req, res) => {
       };
       // Only put global style here.
       const styles = [
-        <link key="normalize" rel="stylesheet" href="" />
+        <link key="normalize" rel="stylesheet" href="/styles/normalize.css" />
       ];
       const scripts = [
         <script key="main" type="text/javascript" src="/javascripts/app.js" charSet="utf-8"></script>
