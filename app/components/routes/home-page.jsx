@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../card';
-const customers = [
+const CARDS = [
   {
     id: 1,
     name: 'AAAA',
@@ -25,16 +25,12 @@ const customers = [
 
 export default class HomePage extends Component {
   render() {
-    return <div style={{ backgroundColor: '#ccc' }}>
-      <header className="page-header">
-        <h2>Choose Customer</h2>
-      </header>
-
+    return <div style={{ backgroundColor: '#fff' }}>
       <section className="page-body">
-        <ul className="customer-grid" style={{ listStyle: 'none', padding: 0 }}>
-          {customers.map( (customer) => {
-            return <li key={customer.id}>
-              <Card {...customer}
+        <ul className="grid" style={{ listStyle: 'none', padding: 0, textAlign: 'center' }}>
+          {CARDS.map( (card) => {
+            return <li key={card.id} style={{ display: 'inline-block', width: 300 }}>
+              <Card {...card}
                 onHeaderClick={this._handleCardHeaderClick}
                 onClick={this._handleCardClick}
               />

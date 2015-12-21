@@ -68,7 +68,7 @@ let webpackConfig = {
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.DedupePlugin(),
     // hot reload
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),

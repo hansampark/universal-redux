@@ -1,0 +1,14 @@
+.menu-list {
+  list-style: none;
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+
+.menu-list li {
+  padding: 10px
+}
+
+.menu-list li a {
+  color: #fff;
+  text-decoration: none;
+}
