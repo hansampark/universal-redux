@@ -44,7 +44,7 @@ let webpackConfig = {
         loaders: ['json']
       },
       {
-        test: /\.css$/,
+        test: /\.[s]css$/,
         loader: (DEBUG || ENV === 'development')
               ? 'style!css?modules&localIdentName=[name]--[local]!postcss'
               : ExtractTextPlugin.extract(
