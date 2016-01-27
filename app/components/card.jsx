@@ -10,7 +10,7 @@ export default class Card extends Component {
     imgSrc: PropTypes.string.isRequired,
     onHeaderClick: PropTypes.func,
     onClick: PropTypes.func
-  }
+  };
 
   render() {
     const {

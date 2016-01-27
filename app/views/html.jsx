@@ -8,7 +8,7 @@ export default class HTML extends Component {
     head: PropTypes.object,
     styles: PropTypes.array,
     scripts: PropTypes.array
-  }
+  };
 
   static defaultProps = {
     lang: 'en',
@@ -22,7 +22,7 @@ export default class HTML extends Component {
     },
     styles: [],
     scripts: []
-  }
+  };
 
   constructor(props) {
     super(props)
