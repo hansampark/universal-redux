@@ -9,6 +9,6 @@ const routes = {
     { path: '/', component: HomePage },
     { path: '/about', component: AboutPage }
   ]
-}
+};
 
 export { routes };

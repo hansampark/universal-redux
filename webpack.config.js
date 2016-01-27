@@ -2,12 +2,13 @@
 
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const postcssImport = require('postcss-import');
 const precss = require('precss');
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.DEBUG;
+const BROWSER_LIST = ['last 2 versions'];
 
 let webpackConfig = {
   devtool: 'eval-source-map',
@@ -15,11 +16,11 @@ let webpackConfig = {
   context: __dirname,
 
   entry: {
-    'app': (DEBUG || ENV === 'development')
+    app: (DEBUG || ENV === 'development')
          ? [
-             'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-             './app/app.jsx'
-           ]
+           'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+           './app/app.jsx'
+         ]
          : './app/app.jsx'
   },
 
@@ -45,17 +46,20 @@ let webpackConfig = {
       {
         test: /\.css$/,
         loader: (DEBUG || ENV === 'development')
-              ? 'style!css?modules&localIdentName=[name]--[local]!postcss?pack=cleaner'
-              : ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]--[local]--[hash:base64:5]!postcss?pack=cleaner')
+              ? 'style!css?modules&localIdentName=[name]--[local]!postcss'
+              : ExtractTextPlugin.extract(
+                  'style', 'css?modules&localIdentName=[name]--[local]--[hash:base64:5]!postcss'
+                )
       },
     ]
   },
 
-  postcss: function() {
-    return {
-      defaults: [autoprefixer, precss],
-      cleaner: [autoprefixer({ browsers: ['last 2 versions'] })]
-    };
+  postcss: function plugin(bundler) {
+    return [
+      postcssImport({ addDependencyTo: bundler }),
+      autoprefixer({ browsers: BROWSER_LIST }),
+      precss()
+    ];
   },
 
   progress: false,
@@ -72,11 +76,7 @@ let webpackConfig = {
     // hot reload
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    // TODO: find a way to create separate css map file
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    })
+    new webpack.NoErrorsPlugin()
   ]
 };
 
@@ -89,6 +89,10 @@ if (ENV !== 'development') {
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: ENV !== 'production',
       mangle: ENV === 'production'
+    }),
+    // TODO: find a way to create separate css map file
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
     })
   );
 }

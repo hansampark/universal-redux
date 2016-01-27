@@ -39,6 +39,7 @@
     "history": "^2.0.0-rc2",
     "i18n-abide": "0.0.25",
     "normalize.css": "^3.0.3",
+    "postcss-import": "^8.0.2",
     "react": "^0.14.6",
     "react-addons-shallow-compare": "^0.14.3",
     "react-container": "^0.3.1",
