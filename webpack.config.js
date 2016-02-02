@@ -18,17 +18,17 @@ let webpackConfig = {
   entry: {
     app: (DEBUG || ENV === 'development')
          ? [
-           'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+           'webpack-hot-middleware/client',
            './app/app.jsx'
          ]
          : './app/app.jsx'
   },
 
   output: {
-    path: path.resolve('./public/javascripts'),
+    path: path.resolve('./public/dist'),
     filename: '[name].js',
     chunkFilename: '[name]-[hash].js',
-    publicPath: '/javascripts/'
+    publicPath: '/assets/'
   },
 
   module: {

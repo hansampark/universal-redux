@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import styles from './card.scss';
 
 export default class Card extends Component {
   static propTypes = {
@@ -6,7 +7,7 @@ export default class Card extends Component {
       PropTypes.number,
       PropTypes.string
     ]).isRequired,
-    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     imgSrc: PropTypes.string.isRequired,
     onHeaderClick: PropTypes.func,
     onClick: PropTypes.func
@@ -14,25 +15,32 @@ export default class Card extends Component {
 
   render() {
     const {
-      id, name, imgSrc, onHeaderClick, onClick
+      id, title, imgSrc, onHeaderClick, onClick
     } = this.props;
 
-    return <div className="card" style={{ margin: 10, backgroundColor: '#fff', boxShadow: '0 1px 5px rgba(0, 0, 0, 0.2)' }}>
-      <header style={{ backgroundColor: '#fff', color: '#3f3f3f' }}>
-        <div style={{ display: 'flex', padding: 10, borderBottom: '1px solid rgba(0, 0, 0, 0.05)' }}>
-          <h4 className="card-name" style={{ flex: 1, margin: 0, textAlign: 'left' }}>{name}</h4>
-          <button
-            type="button"
-            className="edit-btn"
-            style={{ width: 30, border: 'none', backgroundColor: 'transparent' }}
-            onClick={() => onHeaderClick && onHeaderClick(id)}>
-            <span style={{ transform: 'scaleY(2)' }}>&gt;</span>
-          </button>
-        </div>
+    return <div className={styles.card}>
+      <header className={styles.header}>
+        <h4 className={styles.title}>{title}</h4>
+        <button
+          type="button"
+          className={styles.btn}
+          onClick={this._handleHeaderClick}>
+          <span className={styles.chevron}>&gt;</span>
+        </button>
       </header>
-      <section className="card-content" style={{ padding: 10 }} onClick={() => onClick && onClick(id)}>
-        <img src={imgSrc} alt={name} style={{ width: '100%', height: 'auto' }} />
+      <section className={styles.content} onClick={this._handleClick}>
+        <img src={imgSrc} alt={title} className={styles.image} />
       </section>
     </div>;
   }
+
+  _handleHeaderClick = () => {
+    const { id, onHeaderClick } = this.props;
+    onHeaderClick && onHeaderClick(id);
+  };
+
+  _handleClick = () => {
+    const { id, onClick } = this.props;
+    onClick && onClick(id);
+  };
 }

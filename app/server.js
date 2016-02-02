@@ -57,13 +57,17 @@ server.get('*', (req, res) => {
 
       };
       // Only put global style here.
-      const styles = [
-        <link key="normalize" rel="stylesheet" href="/styles/normalize.css" />
+      let styles = [
+        <link key="normalize" rel="stylesheet" href="/styles/normalize.css" />,
       ];
       const scripts = [
-        <script key="main" type="text/javascript" src="/javascripts/app.js" charSet="utf-8">
+        <script key="main" type="text/javascript" src="/assets/app.js" charSet="utf-8">
         </script>
       ];
+
+      if (ENV !== 'development') {
+        styles.push(<link key="app" rel="stylesheet" href="/assets/app.css" />);
+      }
 
       res.status(200).send('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(
         <HTML

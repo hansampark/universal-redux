@@ -1,41 +1,44 @@
 import React, { Component } from 'react';
 import Card from '../card';
+import styles from './home-page.scss';
+
 const CARDS = [
   {
     id: 1,
-    name: 'AAAA',
+    title: 'AAAA',
     imgSrc: 'http://placehold.it/300x150'
   },
   {
     id: 2,
-    name: 'BBBB',
+    title: 'BBBB',
     imgSrc: 'http://placehold.it/300x150'
   },
   {
     id: 3,
-    name: 'CCCC',
+    title: 'CCCC',
     imgSrc: 'http://placehold.it/300x150'
   },
   {
     id: 4,
-    name: 'DDDD',
+    title: 'DDDD',
     imgSrc: 'http://placehold.it/300x150'
   },
 ];
 
 export default class HomePage extends Component {
   render() {
-    return <div style={{ backgroundColor: '#fff' }}>
+    return <div className={styles.page}>
       <section className="page-body">
-        <ul className="grid" style={{ listStyle: 'none', padding: 0, textAlign: 'center' }}>
-          {CARDS.map( (card) => {
-            return <li key={card.id} style={{ display: 'inline-block', width: 300 }}>
-              <Card {...card}
+        <ul className={styles.grid}>
+          {CARDS.map(card => {
+            return <li key={card.id} className={styles['grid-item']}>
+              <Card
+                {...card}
                 onHeaderClick={this._handleCardHeaderClick}
                 onClick={this._handleCardClick}
               />
             </li>;
-          }, this)}
+          })}
         </ul>
       </section>
     </div>;
