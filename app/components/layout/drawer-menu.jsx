@@ -16,12 +16,13 @@ export default class DrawerMenu extends Component {
     return (
       <aside className={styles.container}>
         <header className={styles.header}>
-          Menu
+        Menu
         </header>
 
         <section className={styles.body}>
           <ul className={styles['menu-list']}>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/graph">Graph</Link></li>
             <li><Link to="/about">About</Link></li>
           </ul>
         </section>

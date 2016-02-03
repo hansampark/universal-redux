@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Page from '../page';
 import Card from '../card';
 import styles from './home-page.scss';
 
@@ -27,7 +28,7 @@ const CARDS = [
 
 export default class HomePage extends Component {
   render() {
-    return <div className={styles.page}>
+    return <Page title="Home">
       <section className="page-body">
         <ul className={styles.grid}>
           {CARDS.map(card => {
@@ -41,7 +42,7 @@ export default class HomePage extends Component {
           })}
         </ul>
       </section>
-    </div>;
+    </Page>;
   }
 
   _handleCardHeaderClick(id) {
