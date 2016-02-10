@@ -9,7 +9,7 @@ const webpack = require('webpack');
 const ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.DEBUG;
 const BROWSER_LIST = ['last 2 versions'];
-
+console.log(ENV, process.env.NODE_ENV)
 let webpackConfig = {
   devtool: 'eval-source-map',
 
@@ -36,7 +36,11 @@ let webpackConfig = {
       {
         test: /\.js[x]$/,
         include: path.join(__dirname, 'app'),
-        loaders: ['babel']
+        exclude: path.join(__dirname, 'app', 'views'),
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react', 'stage-0', 'react-hmre']
+        }
       },
       {
         test: /\.json$/,
