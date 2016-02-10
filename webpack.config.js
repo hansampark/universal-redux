@@ -34,9 +34,9 @@ let webpackConfig = {
   module: {
     loaders: [
       {
-        test: /\.js[x]$/,
+        test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'app'),
-        exclude: path.join(__dirname, 'app', 'views'),
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
           presets: ['es2015', 'react', 'stage-0', 'react-hmre']

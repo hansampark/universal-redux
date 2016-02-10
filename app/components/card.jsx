@@ -13,6 +13,10 @@ export default class Card extends Component {
     onClick: PropTypes.func
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const {
       id, title, imgSrc, onHeaderClick, onClick
