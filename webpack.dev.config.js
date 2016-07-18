@@ -1,21 +1,26 @@
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssImport = require('postcss-import');
 const precss = require('precss');
 const path = require('path');
 const webpack = require('webpack');
 
-const { NODE_ENV, DEBUG } = process.env;
-const ENV = NODE_ENV || 'development';
+const { PORT } = process.env;
+const ENV = 'development';
 const BROWSER_LIST = ['last 2 versions'];
+const APP_PORT = PORT || 3000;
+const DEV_SERVER_PORT = APP_PORT + 1;
 
 const webpackConfig = {
-  devtool: (DEBUG || ENV === 'development') ? '#cheap-module-eval-source-map' : undefined,
+  devtool: '#cheap-module-eval-source-map',
+  cache: true,
+  debug: true,
 
   context: __dirname,
 
   entry: {
     app: [
+      `webpack-dev-server/client?http://localhost:${DEV_SERVER_PORT}`,
+      'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       'babel-polyfill',
       './app/app.jsx'
@@ -25,7 +30,6 @@ const webpackConfig = {
   output: {
     path: path.resolve('./public/dist'),
     filename: '[name].js',
-    chunkFilename: '[name]-[hash].js',
     publicPath: '/assets/'
   },
 
@@ -44,10 +48,7 @@ const webpackConfig = {
       },
       {
         test: /\.[s]css$/,
-        loader: ExtractTextPlugin.extract(
-          'style',
-          'css?modules&localIdentName=[name]--[local]--[hash:base64:5]!postcss'
-        )
+        loader: 'style!css?modules&localIdentName=[name]--[local]!postcss'
       },
     ],
     noParse: /\.min\.js/,
@@ -80,28 +81,9 @@ const webpackConfig = {
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-
-    // TODO: find a way to create separate css map file
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    })
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
 };
-
-if (!(DEBUG || ENV === 'development')) {
-  webpackConfig.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      mangle: true,
-      compress: {
-        warnings: false,
-        screw_ie8: true
-      },
-      comments: false,
-    })
-  );
-}
 
 module.exports = webpackConfig;

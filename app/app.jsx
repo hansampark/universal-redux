@@ -1,9 +1,27 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
+import { AppContainer } from 'react-hot-loader';
 import { routes } from './routes';
 
+const rootEl = document.getElementById('app');
+
 render(
-  <Router routes={routes} history={browserHistory} />,
-  document.getElementById('app')
+  <AppContainer>
+    <Router routes={routes} history={browserHistory} />
+  </AppContainer>,
+  rootEl
 );
+
+if (module.hot) {
+  module.hot.accept('./routes', () => {
+    const nextRoutes = require('./routes').rotues;
+
+    render(
+      <AppContainer>
+        <Router routes={nextRoutes} history={browserHistory} />
+      </AppContainer>,
+      rootEl
+    );
+  });
+}
