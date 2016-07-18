@@ -1,19 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
+/**
+ * Layout
+ * @flow
+ */
+import React, { Component } from 'react';
 import DrawerMenu from './drawer-menu';
 import styles from './application-layout.scss';
 
 export default class Layout extends Component {
-  static childContextTypes = {
-    onPageMount: PropTypes.func
-  };
-
-  getChildContext() {
-    return {
-      onPageMount: this._handlePageMount
-    };
-  }
-
   constructor(props) {
     super(props);
 
