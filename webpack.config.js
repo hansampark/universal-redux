@@ -4,12 +4,13 @@ const postcssImport = require('postcss-import');
 const precss = require('precss');
 const path = require('path');
 const webpack = require('webpack');
+
 const ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.DEBUG;
 const BROWSER_LIST = ['last 2 versions'];
-console.log(ENV, process.env.NODE_ENV)
-let webpackConfig = {
-  devtool: 'eval-source-map',
+
+const webpackConfig = {
+  devtool: '#cheap-eval-source-map',
 
   context: __dirname,
 
@@ -89,9 +90,15 @@ if (ENV !== 'development') {
 
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: ENV !== 'production',
-      mangle: ENV === 'production'
+      sourceMap: DEBUG,
+      mangle: !DEBUG,
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      },
+      comments: false,
     }),
+
     // TODO: find a way to create separate css map file
     new ExtractTextPlugin('app.css', {
       allChunks: true
