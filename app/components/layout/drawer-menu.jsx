@@ -22,7 +22,6 @@ export default class DrawerMenu extends Component {
         <section className={styles.body}>
           <ul className={styles['menu-list']}>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/graph">Graph</Link></li>
             <li><Link to="/about">About</Link></li>
           </ul>
         </section>
