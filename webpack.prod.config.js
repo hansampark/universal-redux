@@ -10,7 +10,7 @@ const ENV = NODE_ENV || 'development';
 const BROWSER_LIST = ['last 2 versions'];
 
 const webpackConfig = {
-  devtool: (DEBUG || ENV === 'development') ? '#cheap-module-eval-source-map' : undefined,
+  devtool: DEBUG ? '#source-map' : undefined,
 
   context: __dirname,
 

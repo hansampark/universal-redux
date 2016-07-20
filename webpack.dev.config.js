@@ -4,14 +4,14 @@ const precss = require('precss');
 const path = require('path');
 const webpack = require('webpack');
 
-const { PORT } = process.env;
+const { PORT, DEBUG } = process.env;
 const ENV = 'development';
 const BROWSER_LIST = ['last 2 versions'];
 const APP_PORT = PORT || 3000;
 const DEV_SERVER_PORT = APP_PORT + 1;
 
 const webpackConfig = {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: DEBUG ? '#cheap-module-eval-source-map' : '#eval',
   cache: true,
   debug: true,
 
