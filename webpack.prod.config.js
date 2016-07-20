@@ -18,7 +18,7 @@ const webpackConfig = {
     app: [
       'react-hot-loader/patch',
       'babel-polyfill',
-      './app/app.jsx'
+      './app/main.jsx'
     ]
   },
 

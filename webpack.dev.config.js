@@ -23,7 +23,7 @@ const webpackConfig = {
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       'babel-polyfill',
-      './app/app.jsx'
+      './app/main.jsx'
     ]
   },
 
