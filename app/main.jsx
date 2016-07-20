@@ -1,25 +1,24 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
-import { routes } from './routes';
+import Root from './root';
 
 const rootEl = document.getElementById('app');
 
 render(
   <AppContainer>
-    <Router routes={routes} history={browserHistory} />
+    <Root />
   </AppContainer>,
   rootEl
 );
 
 if (module.hot) {
-  module.hot.accept('./routes', () => {
-    const nextRoutes = require('./routes').rotues;
+  module.hot.accept('./root', () => {
+    const NextRoot = require('./root').rotues;
 
     render(
       <AppContainer>
-        <Router routes={nextRoutes} history={browserHistory} />
+        <NextRoot />
       </AppContainer>,
       rootEl
     );
