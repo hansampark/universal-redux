@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "build": "webpack --verbose --progress --colors --display-error-details --config webpack.config.js",
-    "watch": "webpack-dev-server --config webpack.dev.config.js",
+    "watch": "node index",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm run test -- --watch"
   },
