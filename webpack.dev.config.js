@@ -9,6 +9,7 @@ const ENV = 'development';
 const BROWSER_LIST = ['last 2 versions'];
 const APP_PORT = PORT || 3000;
 const DEV_SERVER_PORT = APP_PORT + 1;
+const MODULE_PATH = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig = {
   devtool: DEBUG ? '#cheap-module-eval-source-map' : '#eval',
@@ -51,7 +52,10 @@ const webpackConfig = {
         loader: 'style!css?modules&localIdentName=[name]--[local]!postcss'
       },
     ],
-    noParse: /\.min\.js/,
+    noParse: [
+      /\.min\.js/,
+      `${MODULE_PATH}/localforage/dist/localforage.js`
+    ]
   },
 
   resolve: {

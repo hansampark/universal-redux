@@ -7,6 +7,7 @@ const webpack = require('webpack');
 
 const { NODE_ENV, DEBUG } = process.env;
 const ENV = NODE_ENV || 'development';
+const MODULE_PATH = path.resolve(__dirname, 'node_modules');
 const BROWSER_LIST = ['last 2 versions'];
 
 const webpackConfig = {
@@ -50,7 +51,10 @@ const webpackConfig = {
         )
       },
     ],
-    noParse: /\.min\.js/,
+    noParse: [
+      /\.min\.js/,
+      `${MODULE_PATH}/localforage/dist/localforage.js`
+    ]
   },
 
   resolve: {
